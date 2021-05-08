@@ -45,11 +45,11 @@ class Person(Human):
         self.wealth += income
         print(f'Available budget after income is {self.wealth}')
 
-    def buy_house(self, house):
+    def buy_house(self, house, discount):
         if self.wealth >= house.cost:
-            self.wealth -= (house.cost - (house.cost * Realtor.discount))
+            self.wealth -= int(house.cost - (house.cost * discount))
             self.own_property.append(house)
-            print(f'{self.name} just bought the {str(house)}')
+        print(f'{self.name} just bought the {str(house)}. Current budget is {self.wealth}')
 
 
 class RealtorUnique(type):
@@ -88,6 +88,6 @@ class Realtor(metaclass=RealtorUnique):
 
 annrealtor = Realtor('Anna', 0.1, ['house1', 'house2', 'house3'])
 person = Person("Poul", 36, 20000, ['dacha'])
-
-print(person.info(), person.make_money(2000), )
+house = House(10000, 30)
+print(person.info(), person.buy_house(house, annrealtor.discount))
 
