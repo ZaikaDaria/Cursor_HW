@@ -1,0 +1,19 @@
+1. Insert dump of shop.sql to your local database
+
+sudo chmod 0777 shop.sql
+sudo mysql -u root -p shop < shop.sql
+sudo mysql -u root -p shop
+
+2. Modify table products add user_id as foreign key
+
+mysql> USE shop;
+mysql> ALTER TABLE products ADD COLUMN user_id int NOT NULL;
+mysql> UPDATE products set user_id=1;
+mysql> ALTER TABLE products ADD FOREIGN KEY (user_id) REFERENCES users(id);
+
+3. Select users their products, collections and images and write this query to file.
+
+mysql> SELECT users.first_name, users.last_name, products.title as product_title, products.price, categories.title as category_title, product_images.file as
+image FROM users JOIN products ON users.id=products.user_id JOIN categories ON categories.id JOIN categories_products ON categories.id=categories_products.category_id JOIN product_images ON product_images.product_id = categories_products.product_id INTO OUTFILE '/var/lib/mysql-files/select_query_res.txt';
+
+sudo mysqldump -u root --password=password shop > shop_new.sql
