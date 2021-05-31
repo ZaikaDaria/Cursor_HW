@@ -1,0 +1,12 @@
+1. Save the ubuntu images to a tar/zip archive and then extract the layers and metadata files from them.(Tip: use `docker save -o` command)
+
+    docker images
+    docker save -o ubuntu.tar ubuntu
+    ls -sh
+    tar -xvf ubuntu.tar
+
+2*. Run a container that outputs the current date and time in Rome. Should be only Dockerfile.(Tip: user 'tzdata' library)
+
+    docker build -t rome_timezone .
+    docker ps
+    docker run 20
