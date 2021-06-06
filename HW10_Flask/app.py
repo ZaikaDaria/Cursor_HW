@@ -28,7 +28,7 @@ def sub(a, b):
 
 @app.route('/calc/<int:a>/<int:b>/mult')
 def mult(a, b):
-
+    return render_template("mult.html", a=a, b=b, result=a * b)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
