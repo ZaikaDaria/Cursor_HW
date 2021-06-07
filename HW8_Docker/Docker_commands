@@ -1,0 +1,61 @@
+1. Use the simple Flask application and build Dockerfile for it.
+
+    python3 app.py
+
+Create your own image (docker build) and try to run the container and interact with it by using your browser.
+Don't forget to pass the valid ports by using -p. (e.g .: -p 8080: 8080)
+
+    docker build -t first_image .
+    docker images
+    docker run -d -p 8080:8080 first_image
+
+
+Try to use such commands:
+- docker run (with -d, -it, or without) {id}/{name},
+
+    sudo service docker start
+    docker run -d -it -p 8080:8080 first_image
+
+- docker stop {id}/{name},
+
+    docker stop 8c87b8570bce
+
+- docker attach {id}/{name},
+
+    docker attach 8c87b8570bce
+
+- docker inspect {id}/{name},
+
+    docker inspect f1d4ea14f70c
+
+- docker logs {id}/{name}
+
+    docker logs f1d4ea14f70c
+
+Change the flask application to print your name and rebuild the image. Run the container again to verify the result.
+
+    docker build -t new_image .
+    docker images
+    docker run -d new_image
+2*.
+    docker run -it --name my_story ubuntu
+    docker run -p 8000:8080
+
+• In the container, run echo "Your story" > story.txt
+
+    echo "Your story" > story.txt
+
+• Install cowsay with apt-get install cowsay and execute cat story.txt|cowsay.
+
+    apt-get update && apt-get install cowsay
+    cat story.txt|/usr/games/cowsay
+
+• In another terminal window, run docker run -it --name my_story_2 ubuntu
+
+    docker run -it --name my_story_2 ubuntu
+
+• Using ls, check that there is no joke.txt file, because you are in another different container. Also,
+there is no cowsay command.
+
+    ls
+    cat joke.txt|cowsay
